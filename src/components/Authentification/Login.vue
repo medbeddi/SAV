@@ -1,45 +1,59 @@
 <template>
-  <body>
-    <section class="container">
-      <div class="login-container">
-        <!-- First Circle -->
-        <div class="circle circle-one"></div>
-        
-        <!-- Form Container -->
-        <div class="form-container">
-          <img src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png" alt="illustration" class="illustration" />
-          <h1 class="opacity">SE CONNECTER</h1>
-          <form @submit.prevent="loginUser">
-            <input v-model="email" type="email" placeholder="Email" required />
-            <input v-model="password" type="password" placeholder="Password" required />
-            <button type="submit" class="opacity">SE CONNECTER</button>
-          </form>
-          <div class="register-forget opacity">
-            <a href="/inscription">REGISTRE</a>
+  <div class="container">
+    <div class="screen">
+      <div class="screen__content">
+        <form class="login" @submit.prevent="loginUser">
+          <div class="login__field">
+            <i class="login__icon fas fa-user"></i>
+            <input
+              v-model="email"
+              type="text"
+              class="login__input"
+              placeholder="User name / Email"
+              required
+            />
           </div>
-
+          <div class="login__field">
+            <i class="login__icon fas fa-lock"></i>
+            <input
+              v-model="password"
+              type="password"
+              class="login__input"
+              placeholder="Password"
+              required
+            />
+          </div>
+          <button type="submit" class="button login__submit">
+            <span class="button__text">Log In Now</span>
+            <i class="button__icon fas fa-chevron-right"></i>
+          </button>
+        </form>
+        <div class="social-login">
+          <h3><a href="/inscription">REGISTRE</a></h3>
+          <div class="social-icons">
+          
+          </div>
         </div>
-        
-        <!-- Second Circle -->
-        <div class="circle circle-two"></div>
       </div>
-      
-      <!-- Theme Button Container -->
-      <div class="theme-btn-container"></div>
-    </section>
-  </body>
+      <div class="screen__background">
+        <span class="screen__background__shape screen__background__shape4"></span>
+        <span class="screen__background__shape screen__background__shape3"></span>
+        <span class="screen__background__shape screen__background__shape2"></span>
+        <span class="screen__background__shape screen__background__shape1"></span>
+      </div>
+    </div>
+  </div>
 </template>
 
-
 <script>
-import AuthService from '@/services/AuthService';
+import AuthService from "@/services/AuthService";
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     return {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     };
   },
   methods: {
@@ -50,11 +64,11 @@ export default {
       };
       try {
         const response = await AuthService.getToken(credentials);
-        localStorage.setItem('token', response.data.token); // Store JWT token
-        console.log('Token received:', response.data);
-        this.$router.push({ name: 'Dashboard' }); // Navigate to another page after successful login
+        localStorage.setItem("token", response.data.token);
+        console.log("Token received:", response.data);
+        this.$router.push({ name: "Dashboard" });
       } catch (error) {
-        console.error('Login failed:', error.response.data);
+        console.error("Login failed:", error.response.data);
       }
     },
   },
@@ -62,170 +76,181 @@ export default {
 </script>
 
 <style scoped>
-:root {
-  --background: #1a1a2e;
-  --color: #ffffff;
-  --primary-color: #0f3460;
-}
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 
 * {
   box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  font-family: Raleway, sans-serif;
 }
 
 body {
-  margin: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  background: var(--background);
-  color: var(--color);
-  letter-spacing: 1px;
-  transition: background 0.2s ease;
-}
-
-a {
-  text-decoration: none;
-  color: var(--color);
-}
-
-h1 {
-  font-size: 2rem;
+  background: linear-gradient(90deg, #c7c5f4, #776bcc);
 }
 
 .container {
   display: flex;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-.login-container {
+.screen {
+  background: linear-gradient(90deg, #5d54a4, #7c78b8);
   position: relative;
-  width: 22.2rem;
+  height: 600px;
+  width: 360px;
+  box-shadow: 0px 0px 24px #5c5696;
 }
 
-.form-container {
-  border: 1px solid hsla(0, 0%, 65%, 0.158);
-  box-shadow: 0 0 36px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  backdrop-filter: blur(20px);
-  z-index: 99;
-  padding: 2rem;
+.screen__content {
+  z-index: 1;
+  position: relative;
+  height: 100%;
 }
 
-.login-container form input {
-  display: block;
-  padding: 14.5px;
-  width: 100%;
-  margin: 2rem 0;
-  color: var(--color);
-  outline: none;
-  background-color: #9191911f;
-  border: none;
-  border-radius: 5px;
-  font-weight: 500;
-  letter-spacing: 0.8px;
-  font-size: 15px;
-  backdrop-filter: blur(15px);
-}
-
-.login-container form input:focus {
-  box-shadow: 0 0 16px 1px rgba(0, 0, 0, 0.2);
-  animation: wobble 0.3s ease-in;
-}
-
-.login-container form button {
-  background-color: var(--primary-color);
-  color: var(--color);
-  display: block;
-  padding: 13px;
-  border-radius: 5px;
-  outline: none;
-  font-size: 18px;
-  letter-spacing: 1.5px;
-  font-weight: bold;
-  width: 100%;
-  cursor: pointer;
-  margin-bottom: 2rem;
-  transition: all 0.1s ease-in-out;
-}
-
-.login-container form button:hover {
-  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.15);
-  transform: scale(1.02);
-}
-
-.circle {
-  width: 8rem;
-  height: 8rem;
-  background: rgb(107, 107, 239);
-  border-radius: 50%;
+.screen__background {
   position: absolute;
-
-}
-
-.illustration {
-  position: absolute;
-  top: -14%;
-  right: -2px;
-  width: 90%;
-}
-
-.circle-one {
   top: 0;
   left: 0;
-  z-index: -1;
-  transform: translate(-45%, -45%);
-}
-
-.circle-two {
-  bottom: 0;
   right: 0;
-  z-index: -1;
-  transform: translate(45%, 45%);
+  bottom: 0;
+  z-index: 0;
+  clip-path: inset(0 0 0 0);
 }
 
-.register-forget {
-  margin: 1rem 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-.opacity {
-  opacity: 0.6;
-}
-
-.theme-btn-container {
+.screen__background__shape {
+  transform: rotate(45deg);
   position: absolute;
-  left: 0;
-  bottom: 2rem;
 }
 
-.theme-btn {
+.screen__background__shape1 {
+  height: 520px;
+  width: 520px;
+  background: #fff;
+  top: -50px;
+  right: 120px;
+  border-radius: 0 72px 0 0;
+}
+
+.screen__background__shape2 {
+  height: 220px;
+  width: 220px;
+  background: #6c63ac;
+  top: -172px;
+  right: 0;
+  border-radius: 32px;
+}
+
+.screen__background__shape3 {
+  height: 540px;
+  width: 190px;
+  background: linear-gradient(270deg, #5d54a4, #6a679e);
+  top: -24px;
+  right: 0;
+  border-radius: 32px;
+}
+
+.screen__background__shape4 {
+  height: 400px;
+  width: 200px;
+  background: #7e7bb9;
+  top: 420px;
+  right: 50px;
+  border-radius: 60px;
+}
+
+.login {
+  width: 320px;
+  padding: 30px;
+  padding-top: 156px;
+}
+
+.login__field {
+  padding: 20px 0;
+  position: relative;
+}
+
+.login__icon {
+  position: absolute;
+  top: 30px;
+  color: #7875b5;
+}
+
+.login__input {
+  border: none;
+  border-bottom: 2px solid #d1d1d4;
+  background: none;
+  padding: 10px;
+  padding-left: 24px;
+  font-weight: 700;
+  width: 75%;
+  transition: 0.2s;
+}
+
+.login__input:active,
+.login__input:focus,
+.login__input:hover {
+  outline: none;
+  border-bottom-color: #6a679e;
+}
+
+.login__submit {
+  background: #fff;
+  font-size: 14px;
+  margin-top: 30px;
+  padding: 16px 20px;
+  border-radius: 26px;
+  border: 1px solid #d4d3e8;
+  text-transform: uppercase;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  color: #4c489d;
+  box-shadow: 0px 2px 2px #5c5696;
   cursor: pointer;
-  transition: all 0.3s ease-in;
+  transition: 0.2s;
 }
 
-.theme-btn:hover {
-  width: 40px !important;
+.login__submit:active,
+.login__submit:focus,
+.login__submit:hover {
+  border-color: #6a679e;
+  outline: none;
 }
 
-@keyframes wobble {
-  0% {
-    transform: scale(1.025);
-  }
-  25% {
-    transform: scale(1);
-  }
-  75% {
-    transform: scale(1.025);
-  }
-  100% {
-    transform: scale(1);
-  }
+.button__icon {
+  font-size: 24px;
+  margin-left: auto;
+  color: #7875b5;
 }
 
+.social-login {
+  position: absolute;
+  height: 140px;
+  width: 160px;
+  text-align: center;
+  bottom: 0px;
+  right: 0px;
+  color: #fff;
+}
+
+.social-icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-login__icon {
+  padding: 20px 10px;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0px 0px 8px #7875b5;
+}
+
+.social-login__icon:hover {
+  transform: scale(1.5);
+}
 </style>

@@ -108,50 +108,75 @@
   <style scoped>
 /* Navbar Container */
 .navbar {
-  background-color: #2c3e50;
+  background-color: #4A148C; /* Using the same color from your previous navbar style */
   color: white;
-  padding: 10px 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: 20px 0;
+  font-family: 'Open Sans Condensed', sans-serif;
 }
 
 /* Navbar List */
 .navbar-list {
-  display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
-  justify-content: space-around;
-  align-items: center;
+  text-align: center;
 }
 
 /* Navbar Item */
 .navbar-item {
-  position: relative;
   display: inline-block;
-  padding: 8px 12px; /* Ajouter un peu de marge interne */
+  margin: 0 15px;
+  position: relative;
   transition: transform 0.3s ease;
 }
 
-/* Ajout d'un effet au survol */
+/* Hover effect on navbar item */
 .navbar-item:hover {
-  transform: scale(1.05); /* Agrandir légèrement l'élément au survol */
+  transform: scale(1.05);
 }
 
 /* Navbar Link */
 .navbar-link {
+  font-size: 22px;
+  text-transform: uppercase;
   text-decoration: none;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
-  padding: 8px 12px;
+  color: #fff;
+  display: block;
+  position: relative;
+  padding: 4px 0;
   transition: color 0.3s ease, transform 0.3s ease;
 }
 
-.navbar-link:hover,
-.navbar-link:focus {
-  color: #1abc9c;
-  transform: translateY(-2px); /* Légère élévation au survol */
+/* Underline effect for the navbar link */
+.navbar-link::before {
+  content: "";
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  transition: 0.5s transform ease;
+  transform: scale3d(0,1,1);
+  transform-origin: 0 50%;
+}
+
+.navbar-link:hover::before {
+  transform: scale3d(1,1,1);
+}
+
+/* Specific style for dropdown links */
+.dropdown-link {
+  font-size: 0.9rem;
+  padding: 8px 16px;
+  display: block;
+  transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+/* Hover effect for dropdown links */
+.dropdown-link:hover {
+  background-color: #E91E63; /* Pink color from previous navbar style */
+  padding-left: 20px; /* Add indentation for depth */
 }
 
 /* Dropdown Menu */
@@ -159,7 +184,7 @@
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #34495e;
+  background-color:rgb(255, 255, 255);
   list-style: none;
   margin: 0;
   padding: 0;
@@ -173,7 +198,7 @@
   transition: opacity 0.3s ease, visibility 0s 0.3s, transform 0.3s ease;
 }
 
-/* Afficher le dropdown au survol du parent */
+/* Show the dropdown when hovering over the parent item */
 .navbar-item:hover .dropdown {
   display: block;
   opacity: 1;
@@ -182,36 +207,14 @@
   transition: opacity 0.3s ease, visibility 0s, transform 0.3s ease;
 }
 
-/* Dropdown Item */
-.dropdown-item {
-  margin: 0;
-}
-
-/* Dropdown Link */
-.dropdown-link {
-  text-decoration: none;
-  color: white;
-  font-size: 0.9rem;
-  padding: 8px 16px;
-  display: block;
-  transition: background-color 0.3s ease, padding-left 0.3s ease;
-}
-
-.dropdown-link:hover,
-.dropdown-link:focus {
-  background-color: #1abc9c;
-  padding-left: 20px; /* Ajout d'une indentation pour plus de profondeur */
-}
-/* Spécifique à Dashboard */
+/* Specific style for Dashboard link */
 .dashboard-link {
-  color: #3498db; /* Couleur bleu par exemple, vous pouvez personnaliser */
+  color: #3498db; /* Blue color for dashboard */
 }
 
-.dashboard-link:hover,
-.dashboard-link:focus {
-  color: #1abc9c; /* Couleur au survol */
+.dashboard-link:hover {
+  color: #1abc9c; /* Color change on hover */
 }
-
 
   </style>
   
